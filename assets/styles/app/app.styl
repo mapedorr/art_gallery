@@ -1,2 +1,39 @@
-.cocoliso
-  background-color cadetblue
+// -----------------------------------------------------------------------------
+// COLOR VARS (Base color for Color rule: #04AD65)
+$green = #04AD65
+$blue = #1E4247
+$blueL1 = #3E8993
+$red = #D33F25
+$yellow = #ECD306
+$pink = #AD1E64
+$white = #F7F7F7
+$orange = #A04D0C
+$gray = #E7E7E7
+$black = #313131
+
+// -----------------------------------------------------------------------------
+// GLOBAL STYLES DEFINITION
+body
+  color $black
+  font-family Arial
+
+.form-control
+.btn
+  border-radius 0
+  
+.form-control
+  border 2px solid $black
+  &:focus
+    border-color $green
+    box-shadow none
+
+.btn
+.btn&:hover
+  background-image none
+  background-color $blue
+  border none
+  &:hover
+    background-color $blueL1
+
+@import 'header/header'
+@import 'login/login'

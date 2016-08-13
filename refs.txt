@@ -1,0 +1,6 @@
+useful links:
+http://sailsjs.org/documentation/concepts/
+https://openwebinars.net/tutorial-sailsjs-instalacion/
+https://scotch.io/tutorials/build-a-todo-app-using-sailsjs-and-angularjs
+https://www.manning.com/books/sails-js-in-action
+http://sailsjs.org/documentation/concepts/views/view-engines

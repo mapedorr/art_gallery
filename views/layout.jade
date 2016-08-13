@@ -10,14 +10,18 @@ html(lang="en")
     //- import application styles
     link(rel="stylesheet", href="/styles/app/app.css")
 
-  body(ng-app='artGalleryApp')
-    //- header will be here
-    h1 Welcome to Ruvacaba Art Gallery.
+    block head
 
-    block body
+  body(ng-app='artGalleryApp')
+    //- header
+    include app/header/header
+
+    .container-fluid
+      block body
 
     //- import dependencies
     script(src='js/dependencies/angular.js')
     //- import application JavaScript files
     script(src='js/app/controllers/LoginCtrl.js')
+    script(src='js/app/controllers/HomepageCtrl.js')
     script(src='js/app/app.js')
