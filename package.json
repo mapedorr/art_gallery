@@ -35,6 +35,7 @@
   "author": "samorost",
   "license": "",
   "devDependencies": {
+    "grunt-contrib-stylus": "^1.2.0",
     "jade": "^1.11.0"
   }
 }
