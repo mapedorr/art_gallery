@@ -1,0 +1,21 @@
+{
+  "name": "art_gallery_wiredelta",
+  "description": "a Sails application",
+  "main": "app.js",
+  "authors": [
+    "mapedorr@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7"
+  }
+}
