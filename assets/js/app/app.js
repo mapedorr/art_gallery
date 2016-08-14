@@ -4,7 +4,8 @@
   var app = angular.module('artGalleryApp', [
     'OverlayDirective',
     'LoginController',
-    'HomepageController'
+    'HomepageController',
+    'ProfileController'
   ]);
 
   // configure application

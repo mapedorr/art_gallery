@@ -90,13 +90,13 @@
       // controller functions
       // -----------------------------------------------------------------------
 
-      // function that assigns the ID of the received card to $scope.highlightedCard
+      // method that assigns the ID of the received card to $scope.highlightedCard
       // so the style of the element can be updated
       $scope.highlight = function (card) {
         $scope.highlightedCard = card && card.id;
       };
 
-      // function that opens the Overlay Directive and shows the full information
+      // method that opens the Overlay Directive and shows the full information
       // of the received card
       $scope.showDetail = function (card) {
         $scope.selectedCard = angular.copy(card);

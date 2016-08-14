@@ -2,9 +2,12 @@
 // GLOBAL VARS
 // (Base color for Color rule: #04AD65)
 $green = #04AD65
+$greenBtn = #039356
+$greenBtnL1 = #04BA6C
 $blue = #1E4247
 $blueL1 = #3E8993
-$red = #D33F25
+$red = #932C1A
+$redL1 = #D33F25
 $yellow = #ECD306
 $pink = #AD1E64
 $white = #F7F7F7
@@ -40,6 +43,9 @@ body
   
 .form-control
   border 2px solid $black
+  margin-bottom 5px
+  padding 10px
+  height 45px
   &:focus
     border-color $green
     box-shadow none
@@ -47,12 +53,18 @@ body
 .btn
 .btn&:hover
   background-image none
-  background-color $blue
   border none
+.btn-primary
+  background-color $greenBtn
   &:hover
-    background-color $blueL1
+    background-color $greenBtnL1
+.btn-danger
+  background-color $red
+  &:hover
+    background-color $redL1
 
 @import 'header/header'
 @import 'login/login'
 @import 'homepage/homepage'
+@import 'admin/profile'
 @import 'directives/overlayDir'
