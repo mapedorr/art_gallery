@@ -33,6 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'app/homepage' },
-  '/login': { view: 'app/login/login' }
+  '/login': { view: 'app/login/login' },
+  '/app/directives/overlayDir.html': { view: 'app/directives/overlayDir' }
 
 };

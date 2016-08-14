@@ -41,6 +41,16 @@ module.exports = function(grunt) {
         dest: './assets/styles/'
       },
       {
+        // copy BOOTSTRAP glyphicons FONT files to '.tmp/public/fonts' so they
+        // can be used by Bootstrap
+        expand: true,
+        cwd: './bower_components/bootstrap/fonts',
+        src: [
+          '*.*'
+        ],
+        dest: '.tmp/public/fonts'
+      },
+      {
         // copy ANGULARJS JS files to 'assets/js/dependencies/' so they can be
         // automatically copied to '.tmp/public/js/dependencies/' by 'tasks/pipeline.js'
         expand: true,

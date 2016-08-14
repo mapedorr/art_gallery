@@ -2,6 +2,7 @@
   'use strict';
 
   var app = angular.module('artGalleryApp', [
+    'OverlayDirective',
     'LoginController',
     'HomepageController'
   ]);

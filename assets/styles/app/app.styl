@@ -1,5 +1,6 @@
 // -----------------------------------------------------------------------------
-// COLOR VARS (Base color for Color rule: #04AD65)
+// GLOBAL VARS
+// (Base color for Color rule: #04AD65)
 $green = #04AD65
 $blue = #1E4247
 $blueL1 = #3E8993
@@ -10,12 +11,28 @@ $white = #F7F7F7
 $orange = #A04D0C
 $gray = #E7E7E7
 $black = #313131
+$cardPrice = #ffcccc
+$smartphone = 'screen and (min-width: 320px) and (max-width: 767px)'
+$tablet = 'screen and (min-width: 767px) and (max-width: 991px)'
+$desktop = 'screen and (min-width: 992px)'
+$zLevel = 0
+
+// -----------------------------------------------------------------------------
+// GLOBAL FUNCTIONS
+// function that gets the next z-index to be assigned for components that will
+// be over others (like popups, alerts, and that kind of things)
+getZindex(newLevel)
+  define('$zLevel', $zLevel + newLevel, true)
+  $zLevel
 
 // -----------------------------------------------------------------------------
 // GLOBAL STYLES DEFINITION
 body
   color $black
   font-family Arial
+  z-index getZindex(0)
+  &.hide-scroll
+    overflow hidden
 
 .form-control
 .btn
@@ -37,3 +54,5 @@ body
 
 @import 'header/header'
 @import 'login/login'
+@import 'homepage/homepage'
+@import 'directives/overlayDir'

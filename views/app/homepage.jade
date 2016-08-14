@@ -1,6 +1,16 @@
 extends ../layout
 
 block body
-  #login(ng-controller='loginCtrl')
-    h2.page-header.cocoliso Hi Stylus
-    button.btn.btn-lg.btn-primary {{ salute }}
+  #homepage(ng-controller='homepageCtrl')
+    .row
+      .col-md-4.card(ng-repeat='card in fakeData',
+          ng-class='{highlight: card.id === highlightedCard}')
+        .card-thumbnail(ng-mouseover='highlight(card);',
+            ng-mouseout='highlight();',
+            ng-click='showDetail(card);')
+          img(ng-src='{{card.url}}')
+        .card-title
+          span Title: {{card.title}}
+        .card-artist
+          span Artist: {{card.artist}}
+    overlay-dir(card='selectedCard')

@@ -12,7 +12,7 @@ html(lang="en")
 
     block head
 
-  body(ng-app='artGalleryApp')
+  body(ng-app='artGalleryApp', ng-class='{"hide-scroll": overlayOpen}')
     //- header
     include app/header/header
 
@@ -22,6 +22,7 @@ html(lang="en")
     //- import dependencies
     script(src='js/dependencies/angular.js')
     //- import application JavaScript files
+    script(src='js/app/directives/OverlayDir.js')
     script(src='js/app/controllers/LoginCtrl.js')
     script(src='js/app/controllers/HomepageCtrl.js')
     script(src='js/app/app.js')
