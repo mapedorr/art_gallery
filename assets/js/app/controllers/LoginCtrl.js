@@ -1,3 +1,10 @@
+/**
+ * LoginCtrl.js
+ *
+ * @description :: AngularJS Controller that handles the operations made in the
+ *                 login page (views/app/login/login.jade).
+ */
+
 (function () {
   'use strict';
 
@@ -13,7 +20,7 @@
       $scope.remember = false;
 
       // -----------------------------------------------------------------------
-      // controller functions
+      // controller methods
       // -----------------------------------------------------------------------
       $scope.login = function () {
         console.log("Let's login");

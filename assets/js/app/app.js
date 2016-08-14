@@ -2,7 +2,16 @@
   'use strict';
 
   var app = angular.module('artGalleryApp', [
+    // import modules of Services
+    'AuthService',
+    'GalleryService',
+    'ProfileService',
+    'UserService',
+
+    // import modules of Directives
     'OverlayDirective',
+
+    // import modules of Controllers
     'LoginController',
     'HomepageController',
     'ProfileController'

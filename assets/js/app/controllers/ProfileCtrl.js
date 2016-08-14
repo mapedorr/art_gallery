@@ -1,3 +1,10 @@
+/**
+ * ProfileCtrl.js
+ *
+ * @description :: AngularJS Controller that handles the operations made in the
+ *                 profile page (views/app/admin/profile.jade).
+ */
+
 (function () {
   'use strict';
 
@@ -12,7 +19,7 @@
       $scope.userCopy = null;
 
       // -----------------------------------------------------------------------
-      // controller functions
+      // controller methods
       // -----------------------------------------------------------------------
 
       // method that initializes the variables in the controller and calls functions

@@ -4,6 +4,10 @@ html(lang="en")
     title= 'Rubacava Art Gallery'
     meta(name='viewport',
          content='width=device-width, initial-scale=1, maximum-scale=1')
+
+    //- ------------------------------------------------------------------------
+    //- import CSS files
+
     //- import bootstrap
     link(rel="stylesheet", href="/styles/bootstrap.css")
     link(rel="stylesheet", href="/styles/bootstrap-theme.css")
@@ -19,10 +23,21 @@ html(lang="en")
     .container-fluid
       block body
 
+    //- ------------------------------------------------------------------------
+    //- import JavaScript files
+
     //- import dependencies
     script(src='js/dependencies/angular.js')
+
     //- import application JavaScript files
+    //- import Services
+    script(src='js/app/services/AuthSrv.js')
+    script(src='js/app/services/GallerySrv.js')
+    script(src='js/app/services/ProfileSrv.js')
+    script(src='js/app/services/UserSrv.js')
+    //- import Directives
     script(src='js/app/directives/OverlayDir.js')
+    //- import Controllers
     script(src='js/app/controllers/LoginCtrl.js')
     script(src='js/app/controllers/HomepageCtrl.js')
     script(src='js/app/controllers/ProfileCtrl.js')

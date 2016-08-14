@@ -1,3 +1,14 @@
+/**
+ * OverlayDir.js
+ *
+ * @description :: AngularJS Directive that creates an overlay element that
+ *                 contains all the information of an specific piece of art.
+ *                 Users can navigate through all the images in the gallery using
+ *                 the previous (<) and next (>) buttons.
+ *                 The overlay can be closed using only the X button in the top
+ *                 right corner.
+ */
+
 (function () {
   'use strict';
 

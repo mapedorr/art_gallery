@@ -1,3 +1,10 @@
+/**
+ * HomepageCtrl.js
+ *
+ * @description :: AngularJS Controller that handles the operations made in the
+ *                 homepage page (views/app/homepage.jade).
+ */
+
 (function () {
   'use strict';
 
@@ -87,7 +94,7 @@
       ];
 
       // -----------------------------------------------------------------------
-      // controller functions
+      // controller methods
       // -----------------------------------------------------------------------
 
       // method that assigns the ID of the received card to $scope.highlightedCard
