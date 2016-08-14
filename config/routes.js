@@ -35,6 +35,8 @@ module.exports.routes = {
   '/': { view: 'app/homepage' },
   '/login': { view: 'app/login/login' },
   '/profile': { view: 'app/admin/profile' },
-  '/app/directives/overlayDir.html': { view: 'app/directives/overlayDir' }
+  '/app/directives/overlayDir.html': { view: 'app/directives/overlayDir' },
+  'POST /artpiece/create': 'ArtPieceController.createArtPiece',
+  'POST /artpiece/:id/file': 'ArtPieceController.linkFile'
 
 };
