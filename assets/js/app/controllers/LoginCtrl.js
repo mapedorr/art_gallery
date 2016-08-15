@@ -11,19 +11,33 @@
   angular.module('LoginController', [])
   .controller('loginCtrl', [
     '$scope',
-    function ($scope) {
+    'authSrv',
+    function ($scope, $authSrv) {
       // -----------------------------------------------------------------------
       // controller variables
       // -----------------------------------------------------------------------
       $scope.username = '';
       $scope.password = '';
       $scope.remember = false;
+      $scope.errorMsg = '';
 
       // -----------------------------------------------------------------------
       // controller methods
       // -----------------------------------------------------------------------
       $scope.login = function () {
-        console.log("Let's login");
+        $authSrv.login({
+          username: $scope.username,
+          password: $scope.password
+        }, function (err) {
+          if (err) {
+            $scope.errorMsg = err;
+            return;
+          }
+
+          // [!]
+          // in case of success, the AuthController (/api/controllers/AuthController.js)
+          // will render the homepage page
+        });
       };
     }
   ]);

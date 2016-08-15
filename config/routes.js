@@ -32,10 +32,21 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  // default route
   '/': { view: 'app/homepage' },
+
+  // login(out) API routes
   'GET /login': { view: 'app/login/login' },
+  'POST /login': 'AuthController.login',
+  'GET /logut': 'AuthController.logout',
+  
+  // profile API routes
   'GET /profile': { view: 'app/admin/profile' },
+
+  // static files
   'GET /app/directives/overlayDir.html': { view: 'app/directives/overlayDir' },
+
+  // ArtPiece API routes
   'GET /artpiece/:id/file': 'ArtPieceController.getFile',
   'POST /artpiece/:id/file': 'ArtPieceController.linkFile'
 
