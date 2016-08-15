@@ -3,12 +3,12 @@ extends ../layout
 block body
   #homepage(ng-controller='homepageCtrl')
     .row
-      .col-md-4.card(ng-repeat='card in fakeData',
+      .col-md-4.card(ng-repeat='card in cards',
           ng-class='{highlight: card.id === highlightedCard}')
         .card-thumbnail(ng-mouseover='highlight(card);',
             ng-mouseout='highlight();',
             ng-click='showDetail(card);')
-          img(ng-src='{{card.url}}')
+          img(ng-src='{{card.pictureUrl}}')
         .card-title
           span Title: {{card.title}}
         .card-artist
