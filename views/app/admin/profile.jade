@@ -1,43 +1,40 @@
-extends ../../layout
-
-block body
-  #admin-profile(ng-controller='profileCtrl')
-    form.admin-profile-form(ng-controller='profileCtrl',
-        ng-submit='saveChanges();',
-        novalidate)
-      .admin-profile-picture
-        .container
-          img(ng-src='{{userCopy.picture}}')
-          .edit-button
-            .background
-            .glyphicon.glyphicon-search
-      input.form-control(id='inputUsername'
-          type='text',
-          placeholder='Username',
-          ng-model='userCopy.username',
-          disabled)
-      input.form-control(id='inputPassword'
-          type='password',
-          placeholder='Password',
-          ng-model='userCopy.password')
-      input.form-control(id='inputEmail'
-          type='email',
-          placeholder='Email',
-          ng-model='userCopy.email')
-      input.form-control(id='inputFirstName'
-          type='text',
-          placeholder='First name',
-          ng-model='userCopy.firstName')
-      input.form-control(id='inputLastName'
-          type='text',
-          placeholder='Last name',
-          ng-model='userCopy.lastName')
-      input.form-control(id='inputCountry'
-          type='text',
-          placeholder='Country',
-          ng-model='userCopy.country')
-      .admin-profile-btn-container
-        button.btn.btn-lg.btn-primary(type='submit')
-          | Save changes
-        button.btn.btn-lg.btn-danger(type='button', ng-click='cancelChanges();')
-          | Cancel changes
+#admin-profile
+  form.admin-profile-form(ng-controller='profileCtrl',
+      ng-submit='saveChanges();',
+      novalidate)
+    .admin-profile-picture
+      .container
+        img(ng-src='{{userCopy.picture}}')
+        .edit-button
+          .background
+          .glyphicon.glyphicon-search
+    input.form-control(id='inputUsername'
+        type='text',
+        placeholder='Username',
+        ng-model='userCopy.username',
+        disabled)
+    input.form-control(id='inputPassword'
+        type='password',
+        placeholder='Password',
+        ng-model='userCopy.password')
+    input.form-control(id='inputEmail'
+        type='email',
+        placeholder='Email',
+        ng-model='userCopy.email')
+    input.form-control(id='inputFirstName'
+        type='text',
+        placeholder='First name',
+        ng-model='userCopy.firstName')
+    input.form-control(id='inputLastName'
+        type='text',
+        placeholder='Last name',
+        ng-model='userCopy.lastName')
+    input.form-control(id='inputCountry'
+        type='text',
+        placeholder='Country',
+        ng-model='userCopy.country')
+    .admin-profile-btn-container
+      button.btn.btn-lg.btn-primary(type='submit')
+        | Save changes
+      button.btn.btn-lg.btn-danger(type='button', ng-click='cancelChanges();')
+        | Cancel changes

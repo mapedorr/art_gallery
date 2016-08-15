@@ -38,6 +38,9 @@
           method: 'POST',
           url: '/login',
           data: loginObj
+        }).success(function(data, status, headers, config){
+          currentUser = data;
+          callback();
         }).error(function(data, status, headers, config) {
           callback(data);
         });

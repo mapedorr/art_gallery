@@ -57,6 +57,14 @@ module.exports = function(grunt) {
         cwd: './bower_components/angular',
         src: ['angular.js'],
         dest: './assets/js/dependencies/'
+      },
+      {
+        // copy angular-route files to 'assets/js/dependencies/' so they can be
+        // automatically copied to '.tmp/public/js/dependencies/' by 'tasks/pipeline.js'
+        expand: true,
+        cwd: './bower_components/angular-route',
+        src: ['angular-route.js'],
+        dest: './assets/js/dependencies/'
       }]
     },
     build: {

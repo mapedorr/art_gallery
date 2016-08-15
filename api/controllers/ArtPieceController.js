@@ -12,11 +12,8 @@ module.exports = {
       file: req.file('picture'),
       artPieceId: req.param('id')
     }, function (err, artPieceInDB) {
-      if (err) {
-        res.status(err.status || 400);
-        res.json(err);
-        return;
-      }
+      if (err) return res.negotiate(err);
+      if (!artPieceInDB) return res.notFound();
 
       res.json(artPieceInDB);
     });
@@ -24,11 +21,7 @@ module.exports = {
 
   getFile: function (req, res) {
     ArtPiece.findOne(req.param('id'), function (err, artPieceInDB) {
-      if (err) {
-        res.negotiate(err);
-        return;
-      }
-
+      if (err) return res.negotiate(err);
       if (!artPieceInDB || (artPieceInDB && !artPieceInDB.pictureFd)) return res.notFound();
 
       var SkipperDisk = require('skipper-disk');

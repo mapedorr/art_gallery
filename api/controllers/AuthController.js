@@ -13,20 +13,24 @@ module.exports = {
     rest: false
   },
 
+  /**
+   * Method that authenticates the user. On success, store user data in session.
+   * On failure, redirect to login page.
+   * 
+   * @param  {Object} req The request object.
+   * @param  {Object} res The response object.
+   */
   login: function(req, res) {
-    passport.authenticate('local', function(err, user, info) {
-      if ((err) || (!user)) {
-        return res.send({
-          message: info.message,
-          user: user
-        });
-      }
+    // use local strategy for authentication
+    passport.authenticate('local', function(err, userInDB, info) {
+      if (err) return res.negotiate(err);
+      if (!userInDB) return res.notFound();
+
+      // log in the user and store its information in session
+      // req.session.authenticated = true; 
       req.logIn(user, function(err) {
-        if (err) res.send(err);
-        return res.send({
-          message: info.message,
-          user: user
-        });
+        if (err) return res.negotiate(err);
+        return res.json(user);
       });
     })(req, res);
   },

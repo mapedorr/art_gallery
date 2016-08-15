@@ -13,28 +13,23 @@ passport.deserializeUser(function (id, done) {
 });
 
 passport.use(new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'username',
     passwordField: 'password'
   },
-  function (email, password, done) {
-    User.findOne({ email: email }, function (err, user) {
+  function (username, password, done) {
+    // search the user in the database
+    User.findOne({ username: username }, function (err, userInDB) {
       if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect email.' });
+      if (!userInDB) {
+        return done(null, false, { message: "That username is not in our database." });
       }
 
+      // check if passwords match
       bcrypt.compare(password, user.password, function (err, res) {
-        if (!res) return done(null, false, {message: 'Invalid Password'});
+        if (!res) return done(null, false, {message: 'Invalid password'});
 
-        var returnUser = {
-          email: user.email,
-          createdAt: user.createdAt,
-          id: user.id
-        };
-
-        return done(null, returnUser, {
-          message: 'Logged In Successfully'
-        });
+        // return the obtained User object
+        return done(null, userInDB);
       });
     });
   }

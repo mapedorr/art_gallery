@@ -30,10 +30,6 @@ module.exports = {
 
     pictureFd: {
       type: 'string'
-    },
-
-    owner: {
-      model: 'gallery'
     }
   }
 };

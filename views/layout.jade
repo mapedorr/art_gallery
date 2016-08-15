@@ -8,26 +8,37 @@ html(lang="en")
     //- ------------------------------------------------------------------------
     //- import CSS files
 
-    //- import bootstrap
-    link(rel="stylesheet", href="/styles/bootstrap.css")
-    link(rel="stylesheet", href="/styles/bootstrap-theme.css")
+    //- import bootstrap (when I thought it was necessary, before having access to 'webestimate/js-sample' repo)
+    //- link(rel="stylesheet", href="/styles/bootstrap.css")
+    //- link(rel="stylesheet", href="/styles/bootstrap-theme.css")
+
     //- import application styles
     link(rel="stylesheet", href="/styles/app/app.css")
 
     block head
 
-  body(ng-app='artGalleryApp', ng-class='{"hide-scroll": overlayOpen}')
+  body(ng-app='artGalleryApp',
+      ng-controller='mainCtrl',
+      ng-class='{"hide-scroll": overlayOpen}')
     //- header
     include app/header/header
 
-    .container-fluid
-      block body
+    .container
+      div(ng-view)
+
+    script(type="text/ng-template", id='/homepage.html')
+      include app/homepage
+    script(type="text/ng-template", id='/login.html')
+      include app/login/login
+    script(type="text/ng-template", id='/profile.html')
+      include app/admin/profile
 
     //- ------------------------------------------------------------------------
     //- import JavaScript files
 
     //- import dependencies
     script(src='js/dependencies/angular.js')
+    script(src='js/dependencies/angular-route.js')
 
     //- import application JavaScript files
     //- import Services
@@ -39,6 +50,7 @@ html(lang="en")
     script(src='js/app/directives/OverlayDir.js')
     //- import Controllers
     script(src='js/app/controllers/LoginCtrl.js')
+    script(src='js/app/controllers/MainCtrl.js')
     script(src='js/app/controllers/HomepageCtrl.js')
     script(src='js/app/controllers/ProfileCtrl.js')
     script(src='js/app/app.js')

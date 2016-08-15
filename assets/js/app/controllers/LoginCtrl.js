@@ -11,8 +11,9 @@
   angular.module('LoginController', [])
   .controller('loginCtrl', [
     '$scope',
+    '$location',
     'authSrv',
-    function ($scope, $authSrv) {
+    function ($scope, $location, $authSrv) {
       // -----------------------------------------------------------------------
       // controller variables
       // -----------------------------------------------------------------------
@@ -20,6 +21,7 @@
       $scope.password = '';
       $scope.remember = false;
       $scope.errorMsg = '';
+      console.log('444');
 
       // -----------------------------------------------------------------------
       // controller methods
@@ -34,9 +36,7 @@
             return;
           }
 
-          // [!]
-          // in case of success, the AuthController (/api/controllers/AuthController.js)
-          // will render the homepage page
+          $location.path('/homepage');
         });
       };
     }

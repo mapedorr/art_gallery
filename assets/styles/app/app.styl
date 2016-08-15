@@ -8,10 +8,7 @@ $blue = #1E4247
 $blueL1 = #3E8993
 $red = #932C1A
 $redL1 = #D33F25
-$yellow = #ECD306
-$pink = #AD1E64
 $white = #F7F7F7
-$orange = #A04D0C
 $gray = #E7E7E7
 $black = #313131
 $cardPrice = #ffcccc
@@ -45,23 +42,23 @@ body
   border 2px solid $black
   margin-bottom 5px
   padding 10px
-  height 45px
   &:focus
     border-color $green
     box-shadow none
 
 .btn
-.btn&:hover
-  background-image none
-  border none
+  cursor pointer
+  border 2px solid
+  background none
+  padding 10px 15px
 .btn-primary
-  background-color $greenBtn
+  border-color $greenBtn
   &:hover
-    background-color $greenBtnL1
+    border-color $greenBtnL1
 .btn-danger
-  background-color $red
+  border-color $red
   &:hover
-    background-color $redL1
+    border-color $redL1
 
 @import 'header/header'
 @import 'login/login'
