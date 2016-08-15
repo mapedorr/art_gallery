@@ -7,19 +7,9 @@
  */
 
 module.exports = {
-  createArtPiece: function (options, done) {
-    // create the ArtPiece
-    ArtPiece.create(options).exec(function (err, artPieceInDB) {
-      if (err) {
-        return done(err);
-      }
-      done(null, artPieceInDB);
-    });
-  },
-
-  linkFile: function (options, done) {
+  linkFile: function (data, done) {
     // upload the picture (file) of the art piece
-    options.file.upload(function (err, uploadedFiles) {
+    data.file.upload(function (err, uploadedFiles) {
       if (err) {
         return done(err);
       }
@@ -28,9 +18,9 @@ module.exports = {
         return done({message: "File wasn't uploaded."});
       }
 
-      ArtPiece.update(options.artPieceId,
+      ArtPiece.update(data.artPieceId,
         {
-          pictureUrl: require('util').format('%s/artPiece/picture/%s', sails.getBaseUrl(), options.artPieceId),
+          pictureUrl: require('util').format('http://localhost:1337/artpiece/%s/file', data.artPieceId),
           pictureFd: uploadedFiles[0].fd
         },
         function (err, artPieceUpdated) {

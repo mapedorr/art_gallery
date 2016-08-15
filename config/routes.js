@@ -33,10 +33,10 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'app/homepage' },
-  '/login': { view: 'app/login/login' },
-  '/profile': { view: 'app/admin/profile' },
-  '/app/directives/overlayDir.html': { view: 'app/directives/overlayDir' },
-  'POST /artpiece/create': 'ArtPieceController.createArtPiece',
+  'GET /login': { view: 'app/login/login' },
+  'GET /profile': { view: 'app/admin/profile' },
+  'GET /app/directives/overlayDir.html': { view: 'app/directives/overlayDir' },
+  'GET /artpiece/:id/file': 'ArtPieceController.getFile',
   'POST /artpiece/:id/file': 'ArtPieceController.linkFile'
 
 };
