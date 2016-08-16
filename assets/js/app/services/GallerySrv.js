@@ -29,9 +29,22 @@
        *                             be send.
        */
       var _getAllArtPieces = function (queryObj, callback) {
+        var url = '/artpiece/find';
+        var p = '';
+
+        if (queryObj) {
+          url += '?';
+          for (p in queryObj) {
+            if (queryObj.hasOwnProperty(p)) {
+              url += p + '=' + queryObj[p] + '&';
+            }
+          }
+          url = url.slice(0,-1);
+        }
+
         $http({
           method: 'GET',
-          url: '/artpiece/find'
+          url: url
         }).success(function(data, status, headers, config){
           callback(null, data);
         }).error(function(data, status, headers, config) {

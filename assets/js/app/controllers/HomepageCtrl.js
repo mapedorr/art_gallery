@@ -12,8 +12,10 @@
   .controller('homepageCtrl', [
     '$scope',
     '$location',
+    '$document',
+    '$window',
     'gallerySrv',
-    function ($scope, $location, $gallerySrv) {
+    function ($scope, $location, $document, $window, $gallerySrv) {
       // -----------------------------------------------------------------------
       // controller variables
       // -----------------------------------------------------------------------
@@ -31,13 +33,23 @@
        */
       $scope.initialize = function () {
         // get all the art pieces in database
-        $gallerySrv.getAllArtPieces({}, function (err, artPieces) {
-          if (err) {
-            // ToDo
-            return;
-          }
-
+        $gallerySrv.getAllArtPieces({skip: 0, limit: 3}, function (err, artPieces) {
+          if (err) return;
           $scope.cards = artPieces;
+        });
+
+        // add a listener for the scroll event in the browser
+        $document.on('scroll', function(e) {
+          var scrollY = e.target.defaultView.scrollY;
+
+          if (scrollY > 0 && scrollY >= e.target.defaultView.scrollMaxY) {
+            $gallerySrv.getAllArtPieces({skip: $scope.cards.length, limit: 3},
+              function (err, artPieces) {
+                if (err) return;
+                $scope.cards = $scope.cards.concat(artPieces);
+              }
+            );
+          }
         });
       };
 
@@ -59,8 +71,9 @@
        * @param  {Object} card Object with the information of the card
        *              ==> (see /api/models/ArtPiece.js)
        */
-      $scope.showDetail = function (card) {
-        $scope.selectedCard = angular.copy(card);
+      $scope.showDetail = function (cardIndex) {
+        $scope.selectedCard = cardIndex;
+        $scope.cardsArray = $scope.cards;
       };
 
       // -----------------------------------------------------------------------

@@ -4,10 +4,10 @@
         ng-class='{highlight: card.id === highlightedCard}')
       .card-thumbnail(ng-mouseover='highlight(card);',
           ng-mouseout='highlight();',
-          ng-click='showDetail(card);')
+          ng-click='showDetail($index);')
         img(ng-src='{{card.imageurl}}')
       .card-title
         span Title: {{card.name}}
       .card-artist
         span Artist: {{card.artist}}
-  overlay-dir(card='selectedCard')
+  overlay-dir(card-index='selectedCard', cards-array='cardsArray')
