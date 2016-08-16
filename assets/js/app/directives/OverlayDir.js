@@ -20,6 +20,7 @@
       var closeOverlay = function () {
         // make the card null so 'display: none;' is applied to the overlay
         // curtain and content
+        console.log('close');
         this.card = null;
       };
 
