@@ -20,8 +20,8 @@ module.exports = {
 
       ArtPiece.update(data.artPieceId,
         {
-          pictureUrl: require('util').format('http://localhost:1337/artpiece/%s/file', data.artPieceId),
-          pictureFd: uploadedFiles[0].fd
+          imageurl: require('util').format('%s/artpiece/%s/file', sails.getBaseUrl(), data.artPieceId),
+          imagefd: uploadedFiles[0].fd
         },
         function (err, artPieceUpdated) {
           if (err) {return done(err);}

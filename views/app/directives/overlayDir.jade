@@ -8,11 +8,11 @@
       img(src='/images/icon-prev.png', ng-click='prevCard();')
     .card-wrapper
       .thumbnail-detail-wrapper
-        img(ng-src='{{card.pictureUrl}}')
+        img(ng-src='{{card.imageurl}}')
         .detail-wrapper
-          span.title Title: {{card.title}}
+          span.title Title: {{card.name}}
           span.artist Artist: {{card.artist}}
-          span.description Description: {{card.description}}
+          span.description Description: {{card.about}}
           span.price Price: ${{card.price}} USD
     .right-arrow
       img(src='/images/icon-next.png', ng-click='nextCard();')

@@ -5,9 +5,9 @@
       .card-thumbnail(ng-mouseover='highlight(card);',
           ng-mouseout='highlight();',
           ng-click='showDetail(card);')
-        img(ng-src='{{card.pictureUrl}}')
+        img(ng-src='{{card.imageurl}}')
       .card-title
-        span Title: {{card.title}}
+        span Title: {{card.name}}
       .card-artist
         span Artist: {{card.artist}}
   overlay-dir(card='selectedCard')
