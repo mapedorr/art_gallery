@@ -21,56 +21,92 @@ overlay-dir
     align-content center
     color $white
     z-index getZindex(1)
+    @media $smartphone
+      overflow auto
     &.overlay-visible
-      display flex
-    .overlay-card
-      width 100%
-      height 100%
-      overflow hidden
-      .overlay-card-thumbnail
-        width 100%
-        height 100%
-        img
-          max-width 100%
-          height 100%
-          margin 0 auto
-          display block
-          @media $smartphone
-            width 240px
-            height auto
-      .overlay-card-description
-        display flex
-        flex-direction column
-        padding 10px
+      display block
+    .close-button-container
+      width auto
+      margin 0
+      .close-button
+        width 45px
+        height 45px
         position absolute
-        bottom 0
-        .title
-        .artist
-          font-weight bold
-        .title
-          font-size 24px
-        .artist
-          font-size 18px
-        .description
-        .price
-          font-size 14px
-        .price
-          color $cardPrice
-          font-style italic
-    .close-button
-      width 45px
-      height 45px
-      position absolute
-      right 5px
-      top 5px
-      cursor pointer
-    .left-arrow
-    .right-arrow
-      align-self center
-      clear both
-      // position absolute
-      cursor pointer
-    .left-arrow
-      left 5px
-    .right-arrow
-      right 5px
+        right 5px
+        top 5px
+        cursor pointer
+        z-index getZindex(1)
+    // set up the image wrapper (contains navigation arrows, thumbnail and description)
+    // use: Float layout and Flex layout
+    .image-wrapper
+      display inline-flex
+      width 100%
+      height 80%
+      margin-top 25px
+      @media $smartphone
+        margin-top 60px
+      .left-arrow
+      .right-arrow
+        display flex
+        align-items center
+        width 20%
+        @media $tablet
+          width 10%
+        @media $smartphone
+          width 50%
+          height 85%
+          z-index getZindex(1)
+        img
+          cursor pointer
+      .left-arrow
+        float left
+        img
+          margin-left 10px
+      .right-arrow
+        float right
+        justify-content flex-end
+        img
+          margin-right 10px
+      .card-wrapper
+        width 60%
+        @media $tablet
+          width 80%
+        @media $smartphone
+          width 100%
+          height auto
+          overflow auto
+          position absolute
+          left 0
+        .thumbnail-detail-wrapper
+          width 60vh
+          margin 0 auto
+          display flex
+          flex-direction column
+          @media $smartphone
+            width 100%
+          img
+          .detail-wrapper
+            max-width 100%
+            @media $smartphone
+              width 95%
+              margin 0 auto
+          .detail-wrapper
+            position absolute
+            display flex
+            flex-direction column
+            padding 10px 0
+            @media $smartphone
+              position relative
+            .title
+            .artist
+              font-weight bold
+            .title
+              font-size 24px
+            .artist
+              font-size 18px
+            .description
+            .price
+              font-size 14px
+            .price
+              color $cardPrice
+              font-style italic

@@ -20,10 +20,11 @@ html(lang="en")
   body(ng-app='artGalleryApp',
       ng-controller='mainCtrl',
       ng-class='{"hide-scroll": overlayOpen}')
-    //- header
-    include app/header/header
-
     .container
+      //- header
+      include app/header/header
+
+      //- views content
       div(ng-view)
 
     script(type="text/ng-template", id='/homepage.html')
