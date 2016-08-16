@@ -36,12 +36,13 @@ overlay-dir
         top 5px
         cursor pointer
         z-index getZindex(1)
-    // set up the image wrapper (contains navigation arrows and thumbnail)
-    // use a basic Float layout
+    // set up the image wrapper (contains navigation arrows, thumbnail and description)
+    // use: Float layout and Flex layout
     .image-wrapper
       display inline-flex
       width 100%
       height 80%
+      margin-top 25px
       @media $smartphone
         margin-top 60px
       .left-arrow
