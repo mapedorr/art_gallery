@@ -27,12 +27,24 @@ getZindex(newLevel)
 
 // -----------------------------------------------------------------------------
 // GLOBAL STYLES DEFINITION
+
+// for all the elements in the page, include the border and padding widths
+// and heights as part of their box model calculation to improve percentage
+// assignation for widths
+*
+  -moz-box-sizing border-box;
+  box-sizing border-box;
+
 body
   color $black
   font-family Arial
   z-index getZindex(0)
   &.hide-scroll
     overflow hidden
+
+form
+  width 90%
+  margin 0 auto
 
 .form-control
 .btn
@@ -42,6 +54,7 @@ body
   border 2px solid $black
   margin-bottom 5px
   padding 10px
+  width 100%
   &:focus
     border-color $green
     box-shadow none
@@ -51,14 +64,35 @@ body
   border 2px solid
   background none
   padding 10px 15px
+  margin 10px 0
+  display inline-block
+  &:disabled
+  &.disabled
+  &[disabled]
+    border-color $gray
+    cursor default
+    &:hover
+      border-color $gray
 .btn-primary
   border-color $greenBtn
   &:hover
     border-color $greenBtnL1
+.btn-secondary
+  border-color $blue
+  &:hover
+    border-color $blueL1
 .btn-danger
   border-color $red
   &:hover
     border-color $redL1
+
+.error-message
+  color $redL1
+  padding 10px
+  margin 10px 0
+  width 100%
+  border-bottom 2px solid $redL1
+  transition 2s
 
 @import 'header/header'
 @import 'login/login'

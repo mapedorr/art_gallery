@@ -19,7 +19,7 @@
       // -----------------------------------------------------------------------
       // service methods
       // -----------------------------------------------------------------------
-      var _currentUser = function () {
+      var _getCurrentUser = function (callback) {
         return currentUser;
       };
 
@@ -38,21 +38,40 @@
           method: 'POST',
           url: '/login',
           data: loginObj
-        }).success(function(data, status, headers, config){
-          currentUser = data;
+        })
+        .success(function (data) {
+          if (data.id) currentUser = data;
           callback();
-        }).error(function(data, status, headers, config) {
-          callback(data);
+        })
+        .error(function (data) {
+          callback(data.message || data);
         });
       };
 
       var _logout = function () {};
 
+      var _getSession = function (callback) {
+        if (currentUser) return callback && callback();
+
+        $http({
+          method: 'GET',
+          url: '/session'
+        })
+        .success(function (data) {
+          if (data.id) currentUser = data;
+          callback && callback();
+        })
+        .error(function (data) {
+          callback && callback();
+        });
+      };
+
       // return the object that will be used by other modules in the application
       return {
-        currentUser: _currentUser,
+        getCurrentUser: _getCurrentUser,
         login: _login,
-        logout: _logout
+        logout: _logout,
+        getSession: _getSession
       };
     }
   ]);

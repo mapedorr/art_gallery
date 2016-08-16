@@ -24,20 +24,29 @@ module.exports = {
     // use local strategy for authentication
     passport.authenticate('local', function(err, userInDB, info) {
       if (err) return res.negotiate(err);
-      if (!userInDB) return res.notFound();
+      if (!userInDB) return res.badRequest(info);
 
       // log in the user and store its information in session
-      // req.session.authenticated = true; 
-      req.logIn(user, function(err) {
+      req.session.user = userInDB; 
+      req.logIn(userInDB, function(err) {
         if (err) return res.negotiate(err);
-        return res.json(user);
+        return res.json(userInDB);
       });
     })(req, res);
   },
 
   logout: function(req, res) {
+    req.session.user = undefined;
     req.logout();
     res.redirect('/');
+  },
+
+  checkSession: function (req, res) {
+    if (!req.session.user) {
+      return res.notFound({ message: 'No session stored.' });
+    }
+
+    res.send(req.session.user);
   }
 };
 

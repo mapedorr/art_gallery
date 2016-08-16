@@ -21,12 +21,33 @@
       $scope.password = '';
       $scope.remember = false;
       $scope.errorMsg = '';
-      console.log('444');
 
       // -----------------------------------------------------------------------
       // controller methods
       // -----------------------------------------------------------------------
+      /** 
+       * Method used for the initialization of the controller.
+       */
+      $scope.initialize = function () {
+        $scope.gotoHomepage();
+      };
+
+      /**
+       * Method that change the current location if the user already has a session.
+       */
+      $scope.gotoHomepage = function () {
+        if ($scope.currentUser()) return $location.path('/homepage');
+      };
+
+      /**
+       * Method that sends the data in the login form to the AuthSrv to execute
+       * the login.
+       */
       $scope.login = function () {
+        if (!$scope.username || !$scope.password) {
+          return $scope.errorMsg = 'All fields are required.';
+        }
+
         $authSrv.login({
           username: $scope.username,
           password: $scope.password
@@ -36,9 +57,14 @@
             return;
           }
 
-          $location.path('/homepage');
+          $scope.gotoHomepage();
         });
       };
+
+      // -----------------------------------------------------------------------
+      // initialize
+      // -----------------------------------------------------------------------
+      $scope.initialize();
     }
   ]);
 }());

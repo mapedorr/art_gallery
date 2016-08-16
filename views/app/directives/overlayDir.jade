@@ -1,9 +1,9 @@
 #overlay-curtain(ng-class='{"overlay-visible": card}')
 #overlay-content(ng-class='{"overlay-visible": card}')
   .close-button(ng-click='closeOverlay();')
-    .glyphicon.glyphicon-remove
+    img(src='/images/icon-close.png')
   .left-arrow(ng-click='prevCard();')
-    .glyphicon.glyphicon-chevron-left
+    img(src='/images/icon-prev.png')
   .overlay-card
     .overlay-card-thumbnail
       img(ng-src='{{card.pictureUrl}}')
@@ -13,4 +13,4 @@
       span.description Description: {{card.description}}
       span.price Price: ${{card.price}} USD
   .right-arrow(ng-click='nextCard();')
-    .glyphicon.glyphicon-chevron-right
+    img(src='/images/icon-next.png')

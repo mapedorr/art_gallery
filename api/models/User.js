@@ -4,7 +4,7 @@
  * @description :: Database model that represents a user.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 module.exports = {
 

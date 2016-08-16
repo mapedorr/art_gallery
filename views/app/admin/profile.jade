@@ -4,10 +4,13 @@
       novalidate)
     .admin-profile-picture
       .container
-        img(ng-src='{{userCopy.picture}}')
+        img(ng-show='userCopy.pictureUrl', ng-src='{{userCopy.pictureUrl}}')
+        .no-avatar(ng-show='!userCopy.pictureUrl')
+          | {{ userCopy.initials }}
         .edit-button
           .background
-          .glyphicon.glyphicon-search
+          .icon
+            img(src='/images/icon-search.png')
     input.form-control(id='inputUsername'
         type='text',
         placeholder='Username',
@@ -15,8 +18,14 @@
         disabled)
     input.form-control(id='inputPassword'
         type='password',
-        placeholder='Password',
-        ng-model='userCopy.password')
+        placeholder='New password',
+        ng-model='userCopy.password',
+        ng-show='editPassword')
+    input.form-control(id='inputPasswordConfirm'
+        type='password',
+        placeholder='Confirm new password',
+        ng-model='userCopy.passwordConfirm',
+        ng-show='editPassword')
     input.form-control(id='inputEmail'
         type='email',
         placeholder='Email',
@@ -36,5 +45,7 @@
     .admin-profile-btn-container
       button.btn.btn-lg.btn-primary(type='submit')
         | Save changes
+      button.btn.btn-lg.btn-secondary(type='button', ng-click='editPassword = true;')
+        | Change password
       button.btn.btn-lg.btn-danger(type='button', ng-click='cancelChanges();')
         | Cancel changes

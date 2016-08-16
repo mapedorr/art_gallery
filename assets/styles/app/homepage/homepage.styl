@@ -1,32 +1,41 @@
 #homepage
-  .card
-    margin-bottom 30px
-    padding-left 15px
-    padding-right 15px
-    z-index getZindex(1)
-    @media $smartphone
-      width 100%
-    @media $tablet
-      width 33.3%
-      float left
-    @media $desktop
-      width 33.3%
-      float left
-    &.highlight
+  .row
+    width auto
+    max-width 1200px
+    margin 0 auto;
+    &:after
+      content ""
+      display table
+      clear both
+    .col
+      width 33%
+      margin-bottom 30px
+      padding-left 15px
+      padding-right 15px
+      z-index getZindex(1)
+      @media $smartphone
+        width 100%
+      @media $tablet
+        width 33.3%
+        float left
+      @media $desktop
+        width 33.3%
+        float left
+      &.highlight
+        .card-title
+        .card-artist
+          color $green
+      .card-thumbnail
+        overflow hidden
+        cursor pointer
+        img
+          width 100%
+          height auto
+          display block
+          margin 0 auto
       .card-title
       .card-artist
-        color $green
-    .card-thumbnail
-      overflow hidden
-      cursor pointer
-      img
-        width 100%
-        height auto
-        display block
-        margin 0 auto
-    .card-title
-    .card-artist
-      font-size 24px
-      margin-bottom 15px
-    .card-title
-      font-weight bold
+        font-size 24px
+        margin-bottom 15px
+      .card-title
+        font-weight bold

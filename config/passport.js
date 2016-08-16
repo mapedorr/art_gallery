@@ -1,6 +1,6 @@
 var passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy,
-bcrypt = require('bcrypt');
+bcrypt = require('bcryptjs');
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
@@ -12,10 +12,7 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-passport.use(new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-  },
+passport.use(new LocalStrategy(
   function (username, password, done) {
     // search the user in the database
     User.findOne({ username: username }, function (err, userInDB) {
@@ -25,8 +22,8 @@ passport.use(new LocalStrategy({
       }
 
       // check if passwords match
-      bcrypt.compare(password, user.password, function (err, res) {
-        if (!res) return done(null, false, {message: 'Invalid password'});
+      bcrypt.compare(password, userInDB.password, function (err, res) {
+        if (!res) return done(null, false, { message: 'Invalid password' });
 
         // return the obtained User object
         return done(null, userInDB);
