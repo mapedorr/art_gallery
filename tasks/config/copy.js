@@ -30,27 +30,6 @@ module.exports = function(grunt) {
         dest: '.tmp/public'
       },
       {
-        // copy BOOTSTRAP CSS files to 'assets/styles' so they can be
-        // automatically copied to '.tmp/public/styles/' by 'tasks/pipeline.js'
-        expand: true,
-        cwd: './bower_components/bootstrap/dist/css',
-        src: [
-          'bootstrap.css',
-          'bootstrap-theme.css'
-        ],
-        dest: './assets/styles/'
-      },
-      {
-        // copy BOOTSTRAP glyphicons FONT files to '.tmp/public/fonts' so they
-        // can be used by Bootstrap
-        expand: true,
-        cwd: './bower_components/bootstrap/fonts',
-        src: [
-          '*.*'
-        ],
-        dest: '.tmp/public/fonts'
-      },
-      {
         // copy ANGULARJS JS files to 'assets/js/dependencies/' so they can be
         // automatically copied to '.tmp/public/js/dependencies/' by 'tasks/pipeline.js'
         expand: true,
@@ -65,6 +44,15 @@ module.exports = function(grunt) {
         cwd: './bower_components/angular-route',
         src: ['angular-route.js'],
         dest: './assets/js/dependencies/'
+      },
+      {
+        // copy images for pieces in the gallery...oh Glob, excuseme for this
+        expand: true,
+        cwd: './Source/assets/images',
+        src: [
+          '*.*'
+        ],
+        dest: '.tmp/uploads'
       }]
     },
     build: {

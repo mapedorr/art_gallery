@@ -22,13 +22,13 @@ module.exports = {
   getFile: function (req, res) {
     ArtPiece.findOne(req.param('id'), function (err, artPieceInDB) {
       if (err) return res.negotiate(err);
-      if (!artPieceInDB || (artPieceInDB && !artPieceInDB.pictureFd)) return res.notFound();
+      if (!artPieceInDB || (artPieceInDB && !artPieceInDB.imagefd)) return res.notFound();
 
       var SkipperDisk = require('skipper-disk');
       var fileAdapter = SkipperDisk();
 
       // stream the file down
-      fileAdapter.read(artPieceInDB.pictureFd)
+      fileAdapter.read(artPieceInDB.imagefd)
       .on('error', function (err){
         return res.serverError(err);
       })

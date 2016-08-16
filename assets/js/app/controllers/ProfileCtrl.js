@@ -45,8 +45,11 @@
         if ($scope.currentUser()) {
           $scope.userCopy = angular.copy($scope.currentUser());
           $scope.userCopy.passwordConfirm = '';
-          $scope.userCopy.initials = ($scope.userCopy.firstName[0] + " " +
-            $scope.userCopy.lastName[0]).toUpperCase();
+          $scope.userCopy.initials = $scope.userCopy.firstName[0].toUpperCase() +
+            $scope.userCopy.lastName[0].toLowerCase();
+        }
+        else {
+          $location.path('/login');
         }
       };
 

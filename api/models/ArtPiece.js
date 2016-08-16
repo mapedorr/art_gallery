@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    title: {
+    name: {
       type: 'string'
     },
 
@@ -16,7 +16,7 @@ module.exports = {
       type: 'string'
     },
 
-    description: {
+    about: {
       type: 'string'
     },
 
@@ -24,11 +24,11 @@ module.exports = {
       type: 'float'
     },
 
-    pictureUrl: {
+    imageurl: {
       type: 'string'
     },
 
-    pictureFd: {
+    imagefd: {
       type: 'string'
     }
   }
