@@ -11,11 +11,13 @@
   angular.module('ProfileController', [])
   .controller('profileCtrl', [
     '$scope',
-    function ($scope) {
+    '$location',
+    'authSrv',
+    function ($scope, $location, $authSrv) {
       // -----------------------------------------------------------------------
       // controller variables
       // -----------------------------------------------------------------------
-      $scope.userObj = null;
+      $scope.editPassword = false;
       $scope.userCopy = null;
 
       // -----------------------------------------------------------------------
@@ -25,20 +27,10 @@
       // method that initializes the variables in the controller and calls functions
       // if required
       $scope.initialize = function () {
-        // make a fake user object for testing while templating and styling
-        $scope.userObj = {
-          id: '481244kj34k12j3h4k12j34h',
-          username: 'admin',
-          password: 'admin',
-          email: 'mapedorr@gmail.com',
-          firstName: 'Razputin',
-          lastName: 'Aquato',
-          country: 'Psychocity',
-          picture: 'http://nintendoagemedia.com/users/8507/avatars/psychonauts_n.jpg'
-        };
-
         // make a copy of the user object
-        $scope.cancelChanges();
+        $authSrv.getSession(function () {
+          $scope.cancelChanges();
+        });
       };
 
       // method that sends to the server the new values for the user to be saved
@@ -49,7 +41,13 @@
 
       // method that restores the default values for the user properties
       $scope.cancelChanges = function () {
-        $scope.userCopy = angular.copy($scope.userObj);
+        $scope.editPassword = false;
+        if ($scope.currentUser()) {
+          $scope.userCopy = angular.copy($scope.currentUser());
+          $scope.userCopy.passwordConfirm = '';
+          $scope.userCopy.initials = ($scope.userCopy.firstName[0] + " " +
+            $scope.userCopy.lastName[0]).toUpperCase();
+        }
       };
 
       // -----------------------------------------------------------------------

@@ -14,24 +14,64 @@
       // -----------------------------------------------------------------------
       // service variables
       // -----------------------------------------------------------------------
+      var currentUser = null;
 
       // -----------------------------------------------------------------------
       // service methods
       // -----------------------------------------------------------------------
-      var _isLoggedIn = function () {};
+      var _getCurrentUser = function (callback) {
+        return currentUser;
+      };
 
-      var _currentUser = function () {};
+      /**
+       * Method that sends the login data to the server. In case of error, the
+       * error message is send to the callback function.
+       * 
+       * @param  {Object}   loginObj Object with the required data for the login.
+       *           => username
+       *           => password
+       * @param  {Function} callback Function to which an error message should
+       *                             be send in case of authentication failure.
+       */
+      var _login = function (loginObj, callback) {
+        $http({
+          method: 'POST',
+          url: '/login',
+          data: loginObj
+        })
+        .success(function (data) {
+          if (data.id) currentUser = data;
+          callback();
+        })
+        .error(function (data) {
+          callback(data.message || data);
+        });
+      };
 
-      var _logIn = function () {};
+      var _logout = function () {};
 
-      var _logOut = function () {};
+      var _getSession = function (callback) {
+        if (currentUser) return callback && callback();
+
+        $http({
+          method: 'GET',
+          url: '/session'
+        })
+        .success(function (data) {
+          if (data.id) currentUser = data;
+          callback && callback();
+        })
+        .error(function (data) {
+          callback && callback();
+        });
+      };
 
       // return the object that will be used by other modules in the application
       return {
-        isLoggedIn: _isLoggedIn,
-        currentUser: _currentUser,
-        logIn: _logIn,
-        logOut: _logOut
+        getCurrentUser: _getCurrentUser,
+        login: _login,
+        logout: _logout,
+        getSession: _getSession
       };
     }
   ]);

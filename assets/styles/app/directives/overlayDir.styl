@@ -35,6 +35,9 @@ overlay-dir
           height 100%
           margin 0 auto
           display block
+          @media $smartphone
+            width 240px
+            height auto
       .overlay-card-description
         display flex
         flex-direction column
@@ -60,14 +63,12 @@ overlay-dir
       position absolute
       right 5px
       top 5px
-      font-size 45px
-      text-align center
       cursor pointer
     .left-arrow
     .right-arrow
       align-self center
-      position absolute
-      font-size 32px
+      clear both
+      // position absolute
       cursor pointer
     .left-arrow
       left 5px

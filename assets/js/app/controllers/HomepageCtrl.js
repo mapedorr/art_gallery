@@ -11,8 +11,9 @@
   angular.module('HomepageController', [])
   .controller('homepageCtrl', [
     '$scope',
+    '$location',
     'gallerySrv',
-    function ($scope, $gallerySrv) {
+    function ($scope, $location, $gallerySrv) {
       // -----------------------------------------------------------------------
       // controller variables
       // -----------------------------------------------------------------------
@@ -33,7 +34,6 @@
         $gallerySrv.getAllArtPieces({}, function (err, artPieces) {
           if (err) {
             // ToDo
-            console.log('error getting gallery art pieces: ', err);
             return;
           }
 

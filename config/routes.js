@@ -32,11 +32,25 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'app/homepage' },
-  'GET /login': { view: 'app/login/login' },
-  'GET /profile': { view: 'app/admin/profile' },
+  // view route
+  // '*': 'AuthController.checkSession',
+  'GET /': { view: 'layout' },
+  'GET /login.html': { view: 'app/login/login' },
+  'GET /homepage.html': { view: 'app/homepage' },
+  'GET /profile.html': { view: 'app/admin/profile' },
   'GET /app/directives/overlayDir.html': { view: 'app/directives/overlayDir' },
+
+  // login(out) API routes
+  'POST /login': 'AuthController.login',
+  'GET /logut': 'AuthController.logout',
+  'GET /session': 'AuthController.checkSession',
+
+  // ArtPieceController API routes
   'GET /artpiece/:id/file': 'ArtPieceController.getFile',
-  'POST /artpiece/:id/file': 'ArtPieceController.linkFile'
+  'POST /artpiece/:id/file': 'ArtPieceController.linkFile',
+
+  // UserController API routes
+  'GET /user/:id/avatar': 'UserController.getAvatar',
+  'POST /user/:id/avatar': 'UserController.setAvatar'
 
 };
