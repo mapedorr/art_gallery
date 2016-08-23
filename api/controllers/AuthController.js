@@ -22,6 +22,7 @@ module.exports = {
    */
   login: function(req, res) {
     // use local strategy for authentication
+    console.log(req.cookies);
     passport.authenticate('local', function(err, userInDB, info) {
       if (err) return res.negotiate(err);
       if (!userInDB) return res.badRequest(info);
@@ -37,8 +38,12 @@ module.exports = {
 
   logout: function(req, res) {
     req.session.user = undefined;
-    req.logout();
-    res.redirect('/');
+    req.logOut();
+    req.session.destroy(function () {
+      res.clearCookie('sails.sid');
+      console.log(req.cookies);
+      return res.send('logout successful!');
+    });
   },
 
   checkSession: function (req, res) {

@@ -33,7 +33,6 @@ module.exports.routes = {
   ***************************************************************************/
 
   // view route
-  // '*': 'AuthController.checkSession',
   'GET /': { view: 'layout' },
   'GET /login.html': { view: 'app/login/login' },
   'GET /homepage.html': { view: 'app/homepage' },
@@ -42,7 +41,7 @@ module.exports.routes = {
 
   // login(out) API routes
   'POST /login': 'AuthController.login',
-  'GET /logut': 'AuthController.logout',
+  'GET /logout': 'AuthController.logout',
   'GET /session': 'AuthController.checkSession',
 
   // ArtPieceController API routes
