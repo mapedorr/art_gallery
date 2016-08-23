@@ -63,10 +63,6 @@
         }
       };
 
-      var getNextCard = function (callback) {
-
-      };
-
       return {
         restrict: 'E',
         templateUrl: 'app/directives/overlayDir.html',
