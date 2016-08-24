@@ -50,9 +50,7 @@
 
       var _logout = function () {};
 
-      var _getSession = function (callback) {
-        if (currentUser) return callback && callback();
-
+      var _updateCurrentUser = function (callback) {
         $http({
           method: 'GET',
           url: '/session'
@@ -66,11 +64,17 @@
         });
       };
 
+      var _getSession = function (callback) {
+        if (currentUser) return callback && callback();
+        _updateCurrentUser(callback);
+      };
+
       // return the object that will be used by other modules in the application
       return {
         getCurrentUser: _getCurrentUser,
         login: _login,
         logout: _logout,
+        updateCurrentUser: _updateCurrentUser,
         getSession: _getSession
       };
     }

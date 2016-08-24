@@ -64,6 +64,11 @@ form
   &:focus
     border-color $green
     box-shadow none
+  &.ng-invalid
+    border-color $redL1
+  &.ng-pristine
+  &.ng-empty
+    border 2px solid $black
 
 .btn
   cursor pointer
@@ -76,6 +81,7 @@ form
   &.disabled
   &[disabled]
     border-color $gray
+    color $gray
     cursor default
     &:hover
       border-color $gray
@@ -99,6 +105,9 @@ form
   width 100%
   border-bottom 2px solid $redL1
   transition 2s
+
+.hidden
+  display none
 
 @import 'header/header'
 @import 'footer/footer'

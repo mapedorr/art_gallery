@@ -17,8 +17,7 @@ module.exports = {
 
     password: {
       type: 'string',
-      required: true,
-      minLength: 6
+      required: true
     },
 
     email: {
@@ -60,8 +59,6 @@ module.exports = {
   },
 
   beforeValidate: function (user, callback) {
-    if (user.rol !== 'editor' && user.rol !== 'admin') user.rol = 'editor';
-
     // if the rol of the user to create is 'admin', check if there is not a user
     // with that rol in the database. If exists, set the rol of the user to create
     // to 'editor'
@@ -71,7 +68,7 @@ module.exports = {
         callback(err);
       }
 
-      if (userInDB.length >= 1) {
+      if (userInDB.length >= 1 && user.rol === 'admin') {
         user.rol = 'editor';
       }
 
@@ -81,6 +78,18 @@ module.exports = {
 
   beforeCreate: function (user, callback) {
     // encrypt the user password before it is stored in database
+    this.encryptPassword(user, callback);
+  },
+
+  beforeUpdate: function (user, callback) {
+    if (user.password) {
+      return this.encryptPassword(user, callback);
+    }
+    
+    callback();
+  },
+
+  encryptPassword: function (user, callback) {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(user.password, salt, function(err, hash) {
         if (err) {

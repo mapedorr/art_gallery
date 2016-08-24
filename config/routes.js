@@ -50,6 +50,7 @@ module.exports.routes = {
 
   // UserController API routes
   'GET /user/:id/avatar': 'UserController.getAvatar',
-  'POST /user/:id/avatar': 'UserController.setAvatar'
+  'POST /user/:id/avatar': 'UserController.setAvatar',
+  'PUT /user/:id': 'UserController.updateData'
 
 };

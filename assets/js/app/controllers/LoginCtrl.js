@@ -36,7 +36,7 @@
        * Method that change the current location if the user already has a session.
        */
       $scope.gotoHomepage = function () {
-        if ($scope.currentUser()) return $location.path('/homepage');
+        if ($scope.currentUser()) return $location.path('/profile');
       };
 
       /**
