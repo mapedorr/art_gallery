@@ -41,8 +41,7 @@ module.exports = {
     req.logOut();
     req.session.destroy(function () {
       res.clearCookie('sails.sid');
-      console.log(req.cookies);
-      return res.send('logout successful!');
+      return res.redirect('/login');
     });
   },
 

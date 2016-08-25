@@ -21,7 +21,6 @@
       // -----------------------------------------------------------------------
       var doc = $document[0];
       var contentHeight = 0;
-      
 
       // -----------------------------------------------------------------------
       // scope properties
@@ -29,6 +28,9 @@
       $scope.highlightedCard = null;
       $scope.selectedCard = null;
       $scope.cards = [];
+      $scope.cardsCopy = null;
+      $scope.orderFilter = null;
+      $scope.searchFilter = '';
 
       // -----------------------------------------------------------------------
       // controller methods
@@ -69,7 +71,14 @@
 
         // get all the art pieces in database
         $scope.loadCards(limit, $scope.checkIfMoreCardsNeeded);
+      };
 
+      $scope.searchFilterChange = function (e) {
+        $gallerySrv.findPiece($scope.searchFilter, function (err, artPieces) {
+          if (err) return;
+          $scope.cards = artPieces;
+          if (!$scope.cards && !$scope.searchFilter) $scope.cards = $scope.cardsCopy;
+        });
       };
 
       /**
@@ -109,6 +118,7 @@
           function (err, artPieces) {
             if (err) return callback && (typeof callback === 'function') && callback(err);
             $scope.cards = $scope.cards.concat(artPieces);
+            $scope.cardsCopy = angular.copy($scope.cards);
             callback && (typeof callback === 'function') && callback();
           }
         );
@@ -139,6 +149,13 @@
           }
         }, 100);
       };
+
+      // -----------------------------------------------------------------------
+      // controller listeners
+      // -----------------------------------------------------------------------
+      $scope.$on('orderCardsBy', function (event, attr) {
+        $scope.orderFilter = attr;
+      });
 
       // -----------------------------------------------------------------------
       // controller initiation

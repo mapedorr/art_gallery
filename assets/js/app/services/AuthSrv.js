@@ -48,7 +48,19 @@
         });
       };
 
-      var _logout = function () {};
+      var _logout = function (callback) {
+        currentUser = null;
+        $http({
+          method: 'GET',
+          url: '/logout'
+        })
+        .success(function (data) {
+          callback();
+        })
+        .error(function (data) {
+          callback();
+        });
+      };
 
       var _updateCurrentUser = function (callback) {
         $http({

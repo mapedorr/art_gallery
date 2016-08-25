@@ -3,6 +3,8 @@
     width auto
     max-width 1200px
     margin 0 auto;
+    display flex
+    flex-wrap wrap
     &:after
       content ""
       display table
@@ -11,7 +13,6 @@
       width 33%
       margin-bottom 30px
       padding 0 25px
-      z-index getZindex(1)
       @media $smartphone
         width 100%
       @media $tablet

@@ -45,6 +45,7 @@ module.exports.routes = {
   'GET /session': 'AuthController.checkSession',
 
   // ArtPieceController API routes
+  'GET /artpiece/search': 'ArtPieceController.search',
   'GET /artpiece/:id/file': 'ArtPieceController.getFile',
   'POST /artpiece/:id/file': 'ArtPieceController.linkFile',
 

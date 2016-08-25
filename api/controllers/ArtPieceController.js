@@ -7,6 +7,23 @@
  */
 
 module.exports = {
+  search: function (req, res) {
+    if (!req.query.filter) return res.badRequest();
+
+    ArtPiece.find(
+      {
+        or: [
+          { name: { 'contains': req.query.filter } },
+          { artist: { 'contains': req.query.filter } }
+        ]
+      },
+      function (err, artPieces) {
+        if (err) return res.negotiate(err);
+        res.json(artPieces);
+      }
+    );
+  },
+
   linkFile: function (req, res) {
     ArtPieceService.linkFile({
       file: req.file('picture'),

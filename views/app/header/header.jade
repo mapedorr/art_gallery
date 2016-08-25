@@ -1,4 +1,26 @@
 header#main-header
+  mixin orderBtn(filterName)
+    .btn(class='order-by-' + filterName,
+         ng-class='{"dsc-arrow": ascOrder === false && orderFilter === "' + filterName + '", "asc-arrow": ascOrder === true && orderFilter === "' + filterName + '"}',
+         ng-show='view === "homepage"',
+         ng-click='orderBy("' + filterName + '");')= filterName
+
+  - var arrowClass = 
   .main-header-container
-    .main-header-title Art Gallery
-    .main-header-instructions Click on the image to display more information
+    .main-header-title
+      | Art Gallery
+    .main-header-instructions(ng-show='view === "homepage"')
+      | Click on the image to display more information
+    .buttons-wrapper(ng-show='currentUser();', ng-class='{showSmrtMenu: smartPhoneMenu === true}')
+      .btn.smartphone-menu(ng-click='toggleMenu();')
+        | Menu
+      .btn.logout(ng-click='logout();')
+        | Log out
+      .btn.profile(ng-click='goto("profile");', ng-show='view === "homepage"')
+        | Profile
+      .btn.homepage(ng-click='goto("homepage");', ng-show='view === "profile"')
+        | Homepage
+      +orderBtn('artist')
+      +orderBtn('name')
+      .btn.search(ng-show='view === "homepage"', ng-click='toggleSearch();')
+        | Search
