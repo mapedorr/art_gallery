@@ -56,6 +56,8 @@
         $scope.editPassword = false;
         $scope.updateAvatar = false;
         $scope.confirmPasswordError = false;
+
+        // regular expression that validates the format of the email
         $scope.EMAIL_REGEXP = /^\b[A-Z0-9._%+-]+@[A-Z0-9-.]+\.[A-Za-z]{2,3}\b/i;
 
         // make a copy of the user object
@@ -68,11 +70,7 @@
        * Method that sends to the server the new values for the user to be saved.
        */
       $scope.saveChanges = function () {
-        var originUser = $scope.currentUser();
-
-        // omit the flow if no data was changed
-        $scope.userCopy.username = originUser.username;
-
+        // call the service method that sends the updatable data to the API
         $profileSrv.saveData($scope.userCopy, function (err) {
           if (err) {
             console.error('error updating data:', err);
@@ -81,6 +79,7 @@
 
           // check if the avatar has changed
           if ($scope.updateAvatar === true) {
+            // call the service method that sends the new avatar to the API
             $profileSrv.saveAvatar(file, function (err) {
               if (err) {
                 console.error('error updating avatar:', err);

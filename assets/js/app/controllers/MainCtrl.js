@@ -18,6 +18,7 @@
       // controller variables
       // -----------------------------------------------------------------------
       $scope.currentUser = $authSrv.getCurrentUser;
+      $scope.loading = false;
 
       // -----------------------------------------------------------------------
       // controller methods
@@ -29,6 +30,18 @@
       // -----------------------------------------------------------------------
       // controller listeners
       // -----------------------------------------------------------------------
+      $scope.$on('show-loading', function () {
+        $scope.loading = true;
+      });
+
+      $scope.$on('hide-loading', function () {
+        // too fast you can't see the loading bar
+        setTimeout(function () {
+          $scope.loading = false;
+          $scope.$apply();
+        }, 500);
+      });
+
       $scope.$on('401', function () {
         $location.path('/login');
       });

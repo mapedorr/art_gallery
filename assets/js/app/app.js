@@ -74,7 +74,22 @@
   // create a service that will serve as interceptor
   app.factory('AuthInterceptor', function ($rootScope, $q) {
     return {
+      request: function (request) {
+        // show the loading bar
+        $rootScope.$broadcast('show-loading');
+        return request;
+      },
+
+      response: function (response) {
+        // hide the loading bar
+        $rootScope.$broadcast('hide-loading');
+        return response;
+      },
+
       responseError: function (response) { 
+        // hide the loading bar
+        $rootScope.$broadcast('hide-loading');
+
         // broadcast the state
         $rootScope.$broadcast('' + response.status);
         return $q.reject(response);
