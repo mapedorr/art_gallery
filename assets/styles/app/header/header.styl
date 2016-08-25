@@ -14,3 +14,36 @@
     .main-header-instructions
       font-size 18px
       font-weight normal
+  .buttons-wrapper
+    display inline-flex
+    flex-direction row-reverse
+    position absolute
+    right 5px
+    top 5px
+    *
+      margin-left 5px
+      background-color white
+      text-align center
+    @media $smartphone
+      flex-direction column
+      z-index getZindex(1)
+      *
+        margin 0
+        display none
+      &.showSmrtMenu
+        *
+          display block
+    .smartphone-menu
+      display none
+      @media $smartphone
+        display block
+    .order-by-name
+    .order-by-artist
+      text-transform capitalize
+    .dsc-arrow:before
+    .asc-arrow:before
+      color $yellow
+    .dsc-arrow:before
+      content '\25bc'
+    .asc-arrow:before
+      content '\25b2'

@@ -1,6 +1,8 @@
 #homepage
+  input.form-control(type='text', placeholder='Type artist or picture name',
+      ng-show='showSearchField', ng-change='searchFilterChange()', ng-model='searchFilter')
   .row
-    .col(ng-repeat='card in cards',
+    .col(ng-repeat='card in cards | orderBy:orderFilter:ascOrder',
         ng-class='{highlight: card.id === highlightedCard}')
       .card-thumbnail(ng-mouseover='highlight(card);',
           ng-mouseout='highlight();',

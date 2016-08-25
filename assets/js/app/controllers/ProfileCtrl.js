@@ -13,45 +13,131 @@
     '$scope',
     '$location',
     'authSrv',
-    function ($scope, $location, $authSrv) {
+    'profileSrv',
+    function ($scope, $location, $authSrv, $profileSrv) {
       // -----------------------------------------------------------------------
-      // controller variables
+      // private variables
       // -----------------------------------------------------------------------
-      $scope.editPassword = false;
+      var file = null;
+      var fileInput = null;
+
+      // -----------------------------------------------------------------------
+      // scope properties
+      // -----------------------------------------------------------------------
+      $scope.editPassword = null;
       $scope.userCopy = null;
+      $scope.updateAvatar = null;
+      $scope.confirmPasswordError = null;
+      $scope.EMAIL_REGEXP = null;
 
       // -----------------------------------------------------------------------
-      // controller methods
+      // private functions
+      // -----------------------------------------------------------------------
+      var checkPasswords = function () {
+        if (!$scope.userCopy) return;
+        if ($scope.userCopy.password && !$scope.userCopy.passwordConfirm ||
+            $scope.userCopy.password !== $scope.userCopy.passwordConfirm) {
+          $scope.confirmPasswordError = true;
+        }
+        else {
+          $scope.confirmPasswordError = false;
+        }
+      };
+
+      // -----------------------------------------------------------------------
+      // scope methods
       // -----------------------------------------------------------------------
 
-      // method that initializes the variables in the controller and calls functions
-      // if required
+      /**
+       * Method that initializes the variables in the controller and calls functions
+       * if required.
+       */
       $scope.initialize = function () {
+        $scope.editPassword = false;
+        $scope.updateAvatar = false;
+        $scope.confirmPasswordError = false;
+
+        // regular expression that validates the format of the email
+        $scope.EMAIL_REGEXP = /^\b[A-Z0-9._%+-]+@[A-Z0-9-.]+\.[A-Za-z]{2,3}\b/i;
+
         // make a copy of the user object
         $authSrv.getSession(function () {
           $scope.cancelChanges();
         });
       };
 
-      // method that sends to the server the new values for the user to be saved
+      /**
+       * Method that sends to the server the new values for the user to be saved.
+       */
       $scope.saveChanges = function () {
-        if ($scope.userObj.username !== $scope.userCopy.username) return;
-        // ToDo
+        // call the service method that sends the updatable data to the API
+        $profileSrv.saveData($scope.userCopy, function (err) {
+          if (err) {
+            console.error('error updating data:', err);
+            return;
+          }
+
+          // check if the avatar has changed
+          if ($scope.updateAvatar === true) {
+            // call the service method that sends the new avatar to the API
+            $profileSrv.saveAvatar(file, function (err) {
+              if (err) {
+                console.error('error updating avatar:', err);
+                return;
+              }
+
+              $scope.cancelChanges();
+
+              // add a random number to the avatar URL to force the browser skip
+              // the data in cache
+              $scope.userCopy.avatarUrl += "?rnd=" + Date.now();
+            });
+          }
+        });
       };
 
-      // method that restores the default values for the user properties
+      /**
+       * Method that restores the default values for the user properties.
+       */
       $scope.cancelChanges = function () {
         $scope.editPassword = false;
+
         if ($scope.currentUser()) {
-          $scope.userCopy = angular.copy($scope.currentUser());
-          $scope.userCopy.passwordConfirm = '';
+          $scope.userCopy = angular.copy($authSrv.getCurrentUser());
+          $scope.userCopy.password = null;
+          $scope.userCopy.passwordConfirm = null;
           $scope.userCopy.initials = $scope.userCopy.firstName[0].toUpperCase() +
             $scope.userCopy.lastName[0].toLowerCase();
+          $scope.userCopy.role = undefined;
         }
         else {
           $location.path('/login');
         }
       };
+
+      /**
+       * Method called when the user picks a file for the avatar.
+       */
+      $scope.onPhotoChange = function (e) {
+        $scope.updateAvatar = true;
+
+        fileInput = e;
+        file = e.files[0];
+
+        // verify that the file is an image (type)
+        if ((file.type).indexOf('image') >= 0) {
+          var fr = new FileReader();
+          fr.onload = function (elm) {
+            $scope.userCopy.avatarUrl = elm.target.result;
+            $scope.$apply();
+          }
+
+          fr.readAsDataURL(file);
+        }
+      };
+
+      $scope.$watch('userCopy.password', checkPasswords);
+      $scope.$watch('userCopy.passwordConfirm', checkPasswords);
 
       // -----------------------------------------------------------------------
       // initialize

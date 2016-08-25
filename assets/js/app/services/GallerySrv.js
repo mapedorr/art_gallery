@@ -52,12 +52,29 @@
         });
       };
 
+      /**
+       * Method that sends a filter for searching art pieces where the name OR
+       * the title matches that value.
+       * 
+       * @param  {string}   filter   The value to search in database.
+       * @param  {Function} callback Function to which the server response will
+       *                             be send.
+       */
+      var _findPiece = function (filter, callback) {
+        $http({
+          method: 'GET',
+          url: '/artpiece/search?filter=' + filter
+        }).success(function(data, status, headers, config){
+          callback(null, data);
+        }).error(function(data, status, headers, config) {
+          callback(data);
+        });
+      };
 
       var _createPiece = function (pieceObj, callback) {};
       var _updatePiece = function (pieceObj, callback) {};
       var _deletePiece = function (pieceId, callback) {};
       var _uploadJson = function(json, callback) {};
-      var _findPiece = function (queryObj, callback) {};
 
       // return the object that will be used by other modules in the application
       return {
